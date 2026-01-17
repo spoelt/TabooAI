@@ -1,0 +1,81 @@
+# ===============================
+# OS / System files
+# ===============================
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# ===============================
+# Android Studio / IntelliJ
+# ===============================
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea_modules/
+.idea/caches/
+.idea/libraries/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries/
+.idea/shelf/
+
+# Android Studio local config
+.idea/gradle.xml
+.idea/misc.xml
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/kotlinc.xml
+
+# ===============================
+# Gradle
+# ===============================
+.gradle/
+build/
+**/build/
+
+# Local Gradle settings
+local.properties
+
+# ===============================
+# Kotlin / Java
+# ===============================
+*.class
+*.log
+
+# ===============================
+# Android build artifacts
+# ===============================
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# ===============================
+# Generated files
+# ===============================
+gen/
+out/
+
+# ===============================
+# Keystore / secrets
+# ===============================
+*.jks
+*.keystore
+*.pem
+*.p12
+
+# ===============================
+# Crashlytics / Firebase
+# ===============================
+firebase.json
+crashlytics.properties
+
+# ===============================
+# Misc
+# ===============================
+captures/
+.externalNativeBuild/
+.cxx/
