@@ -2,10 +2,11 @@ package com.spoelt.taboo.ai.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -17,9 +18,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.spoelt.taboo.ai.R
-import com.spoelt.taboo.ai.domain.HomeScreenButtonType
+import com.spoelt.taboo.ai.domain.model.HomeScreenButtonType
+import com.spoelt.taboo.ai.ui.components.LiquidGlassCard
 import com.spoelt.taboo.ai.ui.components.TabooScreen
 import com.spoelt.taboo.ai.ui.theme.Dimens
 import com.spoelt.taboo.ai.ui.theme.TabooTheme
@@ -35,36 +38,49 @@ fun HomeScreen(
         HomeScreenButtonType.SETTINGS,
     )
 
-    TabooScreen(modifier = modifier) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .safeDrawingPadding()
-                .padding(Dimens.spacingM),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-        ) {
-            Text(
-                modifier = Modifier.padding(bottom = Dimens.spacingL),
-                text = stringResource(R.string.home_screen_title),
-                style = MaterialTheme.typography.displayLarge,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-
+    TabooScreen(
+        modifier = modifier,
+        content = { innerPadding ->
             Column(
-                verticalArrangement = Arrangement.spacedBy(Dimens.spacingM),
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .padding(Dimens.spacingM),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
             ) {
-                homeButtonTypes.forEach { type ->
-                    HomeScreenButton(
-                        modifier = Modifier.fillMaxWidth(0.75f),
-                        type = type,
-                        onClick = { onHomeButtonClick(type) },
+                LiquidGlassCard(modifier = Modifier.fillMaxWidth(0.85f)) {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(Dimens.spacingM),
+                        text = stringResource(R.string.home_screen_title),
+                        style = MaterialTheme.typography.displayLarge,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        textAlign = TextAlign.Center,
                     )
+                }
+
+                Spacer(modifier = Modifier.height(Dimens.spacingM))
+
+                LiquidGlassCard(modifier = Modifier.fillMaxWidth(0.85f)) {
+                    Column(
+                        modifier = Modifier.padding(Dimens.spacingL),
+                        verticalArrangement = Arrangement.spacedBy(Dimens.spacingM),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        homeButtonTypes.forEach { type ->
+                            HomeScreenButton(
+                                modifier = Modifier.fillMaxWidth(),
+                                type = type,
+                                onClick = { onHomeButtonClick(type) },
+                            )
+                        }
+                    }
                 }
             }
         }
-    }
+    )
 }
 
 @Composable

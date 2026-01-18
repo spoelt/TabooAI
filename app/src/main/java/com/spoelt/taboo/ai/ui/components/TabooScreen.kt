@@ -20,13 +20,14 @@ import com.spoelt.taboo.ai.ui.theme.TabooTheme
 fun TabooScreen(
     modifier: Modifier = Modifier,
     content: @Composable (PaddingValues) -> Unit,
+    bottomBarContent: (@Composable () -> Unit)? = null,
 ) {
     Box(modifier = modifier.fillMaxSize()) {
         Image(
             modifier = Modifier.fillMaxSize(),
             painter = painterResource(R.drawable.taboo_background),
             contentDescription = null,
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
         )
 
         Box(
@@ -35,14 +36,15 @@ fun TabooScreen(
                 .background(
                     Brush.verticalGradient(
                         listOf(
-                            Color.Black.copy(alpha = 0.4f),
+                            Color.Black.copy(alpha = 0.3f),
                             Color.Transparent
                         )
                     )
                 )
         ) {
             Scaffold(
-                containerColor = Color.Transparent
+                containerColor = Color.Transparent,
+                bottomBar = { bottomBarContent?.invoke() }
             ) { innerPadding ->
                 content(innerPadding)
             }
@@ -55,7 +57,8 @@ fun TabooScreen(
 private fun TabooScreenPreview() {
     TabooTheme {
         TabooScreen(
-            content = {}
+            content = {},
+            bottomBarContent = {},
         )
     }
 }
