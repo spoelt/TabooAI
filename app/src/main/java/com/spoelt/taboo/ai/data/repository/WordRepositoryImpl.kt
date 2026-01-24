@@ -8,11 +8,12 @@ import com.spoelt.taboo.ai.domain.model.TabooCardData
 import com.spoelt.taboo.ai.domain.repository.WordRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class WordRepositoryImpl @Inject constructor(private val context: Context) :
+class WordRepositoryImpl @Inject constructor(@ApplicationContext private val context: Context) :
     WordRepository {
 
     private val moshi = Moshi.Builder().build()
