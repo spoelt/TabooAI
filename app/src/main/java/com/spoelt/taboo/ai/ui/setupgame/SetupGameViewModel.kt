@@ -2,7 +2,6 @@ package com.spoelt.taboo.ai.ui.setupgame
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.spoelt.taboo.ai.domain.model.DifficultyLevel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +16,7 @@ class SetupGameViewModel @Inject constructor() : ViewModel() {
     private val _uiState = MutableStateFlow(initUiState())
     val uiState = _uiState.asStateFlow()
 
-    private val _startGame = MutableSharedFlow<Boolean>()
+    private val _startGame = MutableSharedFlow<Pair<Boolean, List<String>>>()
     val startGame = _startGame.asSharedFlow()
 
     private fun initUiState(): SetupGameUiState {
@@ -25,7 +24,6 @@ class SetupGameViewModel @Inject constructor() : ViewModel() {
         return SetupGameUiState(
             numberOfPlayers = defaultPlayers,
             playerNames = List(defaultPlayers) { "" },
-            difficulty = listOf(DifficultyLevel.EASY), // TODO
             isSetupComplete = false,
         )
     }
@@ -78,7 +76,7 @@ class SetupGameViewModel @Inject constructor() : ViewModel() {
 
     private fun startGame() {
         viewModelScope.launch {
-            _startGame.emit(true)
+            _startGame.emit(true to _uiState.value.playerNames)
         }
     }
 }

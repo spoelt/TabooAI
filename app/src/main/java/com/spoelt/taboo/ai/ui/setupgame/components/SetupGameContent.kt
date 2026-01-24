@@ -8,22 +8,18 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.spoelt.taboo.ai.R
-import com.spoelt.taboo.ai.domain.model.DifficultyLevel
 import com.spoelt.taboo.ai.ui.components.LiquidGlassCard
+import com.spoelt.taboo.ai.ui.components.TabooButton
 import com.spoelt.taboo.ai.ui.components.TabooScreen
 import com.spoelt.taboo.ai.ui.setupgame.SetupGameEvent
 import com.spoelt.taboo.ai.ui.setupgame.SetupGameUiState
@@ -36,6 +32,8 @@ fun SetupGameContent(
     uiState: SetupGameUiState,
     onEvent: (SetupGameEvent) -> Unit,
 ) {
+    val focusManager = LocalFocusManager.current
+
     TabooScreen(
         modifier = modifier,
         content = { innerPadding ->
@@ -96,29 +94,20 @@ fun SetupGameContent(
             }
         },
         bottomBarContent = {
-            Button(
+            TabooButton(
                 modifier = Modifier
                     .fillMaxWidth()
                     .navigationBarsPadding()
                     .padding(horizontal = Dimens.spacingM)
                     .padding(bottom = Dimens.spacingXS)
                     .imePadding(),
-                shape = RoundedCornerShape(Dimens.cornerMedium),
-                elevation = ButtonDefaults.buttonElevation(defaultElevation = Dimens.elevation12),
-                onClick = { onEvent(SetupGameEvent.StartGame) },
+                text = stringResource(R.string.start_game),
                 enabled = uiState.isSetupComplete,
-                colors = ButtonDefaults.buttonColors(
-                    disabledContainerColor = Color.LightGray,
-                    disabledContentColor = Color.DarkGray,
-                )
-            ) {
-                Text(
-                    modifier = Modifier.padding(Dimens.spacingS),
-                    text = stringResource(R.string.start_game),
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Normal,
-                )
-            }
+                onClick = {
+                    focusManager.clearFocus()
+                    onEvent(SetupGameEvent.StartGame)
+                }
+            )
         }
     )
 }
@@ -144,7 +133,6 @@ private fun SetupGameContentEmptyPreview() {
             uiState = SetupGameUiState(
                 numberOfPlayers = 2,
                 playerNames = listOf(),
-                difficulty = listOf(DifficultyLevel.EASY),
                 isSetupComplete = false,
             ),
             onEvent = {},
@@ -162,7 +150,6 @@ private fun SetupGameContentFilledPreview() {
                 playerNames = (1..3).map {
                     "Player $it"
                 },
-                difficulty = listOf(DifficultyLevel.MEDIUM),
                 isSetupComplete = true,
             ),
             onEvent = {},

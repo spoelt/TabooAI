@@ -1,15 +1,15 @@
 package com.spoelt.taboo.ai
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.remember
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.spoelt.taboo.ai.domain.model.HomeScreenButtonType
+import com.spoelt.taboo.ai.ui.game.GameScreen
+import com.spoelt.taboo.ai.ui.gamefinished.GameFinishedScreen
 import com.spoelt.taboo.ai.ui.home.HomeScreen
 import com.spoelt.taboo.ai.ui.nav.Game
 import com.spoelt.taboo.ai.ui.nav.GameFinished
@@ -20,7 +20,7 @@ import com.spoelt.taboo.ai.ui.nav.Settings
 import com.spoelt.taboo.ai.ui.nav.SetupGame
 import com.spoelt.taboo.ai.ui.nav.rememberNavigationState
 import com.spoelt.taboo.ai.ui.nav.toEntries
-import com.spoelt.taboo.ai.ui.setupgame.SetuoGameScreen
+import com.spoelt.taboo.ai.ui.setupgame.SetupGameScreen
 import com.spoelt.taboo.ai.ui.theme.TabooTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,14 +29,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        enableEdgeToEdge(navigationBarStyle = SystemBarStyle.dark(Color.WHITE))
+        enableEdgeToEdge()
 
         setContent {
             val navigationState = rememberNavigationState(
                 startRoute = Home,
-                topLevelRoutes = setOf(
-                    Home, // TODO adapt in future?
-                )
+                topLevelRoutes = setOf(Home)
             )
             val navigator = remember { Navigator(navigationState) }
             val entryProvider = entryProvider {
@@ -52,17 +50,27 @@ class MainActivity : ComponentActivity() {
                     })
                 }
                 entry<SetupGame> {
-                    SetuoGameScreen(
-                        onStartGame = {
-                            navigator.navigate(Game)
+                    SetupGameScreen(
+                        onStartGame = { players ->
+                            navigator.navigate(Game(players))
                         }
                     )
                 }
-                entry<Game> {
-
+                entry<Game> { key ->
+                    GameScreen(
+                        players = key.players,
+                        onEndGame = { players ->
+                            navigator.navigate(GameFinished(players))
+                        }
+                    )
                 }
-                entry<GameFinished> {
-
+                entry<GameFinished> { key ->
+                    GameFinishedScreen(
+                        players = key.players,
+                        onGoBack = {
+                            navigator.navigate(SetupGame)
+                        },
+                    )
                 }
                 entry<HighScores> {
 

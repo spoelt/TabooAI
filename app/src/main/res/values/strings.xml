@@ -9,4 +9,8 @@
     <string name="names_of_players">Namen der Spieler*innen</string>
     <string name="player_label">Spieler*in %d</string>
     <string name="start_game">Spiel starten</string>
+    <string name="end_game">Spiel beenden</string>
+    <string name="cancel">Beenden</string>
+    <string name="player_info_title">Spieler*in</string>
+    <string name="ready_player">Bereit, %s?</string>
 </resources>
