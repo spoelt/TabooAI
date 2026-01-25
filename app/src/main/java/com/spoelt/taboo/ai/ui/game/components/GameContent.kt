@@ -27,7 +27,7 @@ import com.spoelt.taboo.ai.R
 import com.spoelt.taboo.ai.domain.model.TabooCardData
 import com.spoelt.taboo.ai.ui.components.LottieAnimation
 import com.spoelt.taboo.ai.ui.components.TabooAnimatedVisibility
-import com.spoelt.taboo.ai.ui.components.TabooButton
+import com.spoelt.taboo.ai.ui.components.TabooPrimaryButton
 import com.spoelt.taboo.ai.ui.components.TabooScreen
 import com.spoelt.taboo.ai.ui.game.GameEvent
 import com.spoelt.taboo.ai.ui.game.GameUiState
@@ -90,7 +90,7 @@ fun GameContent(
         bottomBarContent = {
             if (!uiState.isLoading) {
                 TabooAnimatedVisibility(!uiState.isTransitioningBetweenPlayers) {
-                    TabooButton(
+                    TabooPrimaryButton(
                         modifier = Modifier
                             .fillMaxWidth()
                             .navigationBarsPadding()

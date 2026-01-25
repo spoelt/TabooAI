@@ -19,7 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.spoelt.taboo.ai.R
 import com.spoelt.taboo.ai.ui.components.LiquidGlassCard
-import com.spoelt.taboo.ai.ui.components.TabooButton
+import com.spoelt.taboo.ai.ui.components.TabooPrimaryButton
 import com.spoelt.taboo.ai.ui.components.TabooScreen
 import com.spoelt.taboo.ai.ui.setupgame.SetupGameEvent
 import com.spoelt.taboo.ai.ui.setupgame.SetupGameUiState
@@ -94,7 +94,7 @@ fun SetupGameContent(
             }
         },
         bottomBarContent = {
-            TabooButton(
+            TabooPrimaryButton(
                 modifier = Modifier
                     .fillMaxWidth()
                     .navigationBarsPadding()

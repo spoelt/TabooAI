@@ -18,7 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.spoelt.taboo.ai.R
-import com.spoelt.taboo.ai.ui.components.TabooButton
+import com.spoelt.taboo.ai.ui.components.TabooPrimaryButton
 import com.spoelt.taboo.ai.ui.components.TabooScreen
 import com.spoelt.taboo.ai.ui.game.PlayerData
 import com.spoelt.taboo.ai.ui.theme.Dimens
@@ -83,7 +83,7 @@ fun GameFinishedScreen(
             }
         },
         bottomBarContent = {
-            TabooButton(
+            TabooPrimaryButton(
                 modifier = Modifier
                     .fillMaxWidth()
                     .navigationBarsPadding()

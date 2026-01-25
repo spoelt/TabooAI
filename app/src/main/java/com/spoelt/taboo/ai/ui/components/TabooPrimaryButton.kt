@@ -18,7 +18,7 @@ import com.spoelt.taboo.ai.ui.theme.Dimens
 import com.spoelt.taboo.ai.ui.theme.TabooTheme
 
 @Composable
-fun TabooButton(
+fun TabooPrimaryButton(
     modifier: Modifier = Modifier,
     text: String,
     enabled: Boolean = true,
@@ -46,9 +46,9 @@ fun TabooButton(
 
 @Preview
 @Composable
-private fun TabooButtonPreview() {
+private fun TabooPrimaryButtonPreview() {
     TabooTheme {
-        TabooButton(
+        TabooPrimaryButton(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(R.string.start_game),
             onClick = {},
