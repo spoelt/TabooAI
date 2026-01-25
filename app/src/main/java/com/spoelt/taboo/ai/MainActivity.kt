@@ -16,7 +16,7 @@ import com.spoelt.taboo.ai.ui.nav.GameFinished
 import com.spoelt.taboo.ai.ui.nav.HighScores
 import com.spoelt.taboo.ai.ui.nav.Home
 import com.spoelt.taboo.ai.ui.nav.Navigator
-import com.spoelt.taboo.ai.ui.nav.Settings
+import com.spoelt.taboo.ai.ui.nav.TabooSettings
 import com.spoelt.taboo.ai.ui.nav.SetupGame
 import com.spoelt.taboo.ai.ui.nav.rememberNavigationState
 import com.spoelt.taboo.ai.ui.nav.toEntries
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
                         val route = when (type) {
                             HomeScreenButtonType.NEW_GAME -> SetupGame
                             HomeScreenButtonType.HIGH_SCORES -> HighScores
-                            HomeScreenButtonType.SETTINGS -> Settings
+                            HomeScreenButtonType.SETTINGS -> TabooSettings
                         }
                         navigator.navigate(route)
                     })
@@ -75,7 +75,7 @@ class MainActivity : ComponentActivity() {
                 entry<HighScores> {
 
                 }
-                entry<Settings> {
+                entry<TabooSettings> {
 
                 }
             }

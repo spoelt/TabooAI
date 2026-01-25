@@ -9,4 +9,4 @@ import kotlinx.serialization.Serializable
 @Serializable data class Game(val players: List<String>) : NavKey
 @Serializable data class GameFinished(val players: List<PlayerData>) : NavKey
 @Serializable data object HighScores : NavKey
-@Serializable data object Settings : NavKey
+@Serializable data object TabooSettings : NavKey
