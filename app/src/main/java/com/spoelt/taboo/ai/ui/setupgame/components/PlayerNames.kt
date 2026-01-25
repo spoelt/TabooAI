@@ -25,6 +25,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.spoelt.taboo.ai.R
+import com.spoelt.taboo.ai.ui.components.TabooAnimatedVisibility
 import com.spoelt.taboo.ai.ui.theme.Dimens
 import com.spoelt.taboo.ai.ui.theme.Downriver
 import com.spoelt.taboo.ai.ui.theme.TabooTheme
@@ -70,11 +71,7 @@ fun PlayerNames(
                 val isVisible = showPlayerField(index)
                 val nextIndex = nextVisibleIndex(index)
 
-                AnimatedVisibility(
-                    visible = isVisible,
-                    enter = fadeIn(),
-                    exit = fadeOut(),
-                ) {
+                TabooAnimatedVisibility(visible = isVisible) {
                     OutlinedTextField(
                         modifier = Modifier
                             .fillMaxWidth()

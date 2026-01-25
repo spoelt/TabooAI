@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import com.spoelt.taboo.ai.R
 import com.spoelt.taboo.ai.data.util.formatTimeLeft
 import com.spoelt.taboo.ai.ui.components.LiquidGlassCard
+import com.spoelt.taboo.ai.ui.components.TabooAnimatedVisibility
 import com.spoelt.taboo.ai.ui.theme.Dimens
 
 @Composable
@@ -50,7 +51,7 @@ fun CurrentTurnInfo(
                 }
             }
 
-            AnimatedVisibility(guessingTime > 0L) {
+            TabooAnimatedVisibility(guessingTime > 0L) {
                 Text(
                     modifier = Modifier.padding(Dimens.spacingM),
                     text = formattedTime,
