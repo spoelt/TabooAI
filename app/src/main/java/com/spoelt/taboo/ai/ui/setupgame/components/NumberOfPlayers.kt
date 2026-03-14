@@ -45,7 +45,7 @@ fun NumberOfPlayers(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(Dimens.spacingS),
         ) {
-            (1..4).forEach {
+            (2..4).forEach {
                 if (numberOfPlayers == it) {
                     SelectedButton(text = "$it")
                 } else {
