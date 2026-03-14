@@ -53,6 +53,9 @@ class MainActivity : ComponentActivity() {
                     SetupGameScreen(
                         onStartGame = { players ->
                             navigator.navigate(Game(players))
+                        },
+                        onBackPressed = {
+                            navigator.goBack()
                         }
                     )
                 }

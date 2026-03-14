@@ -1,8 +1,5 @@
 package com.spoelt.taboo.ai.ui.setupgame.components
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -42,12 +39,13 @@ fun PlayerNames(
     val playerNameAt: (Int) -> String = { index -> names.getOrNull(index).orEmpty() }
     fun nextVisibleIndex(current: Int): Int? =
         ((current + 1)..3).firstOrNull { showPlayerField(it) }
+
     val focusRequesters = remember {
         List(4) { FocusRequester() }
     }
     val focusManager = LocalFocusManager.current
 
-    LaunchedEffect(numberOfPlayers) {
+    LaunchedEffect(Unit) {
         focusRequesters.firstOrNull()?.requestFocus()
     }
 

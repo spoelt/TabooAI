@@ -13,6 +13,7 @@ fun SetupGameScreen(
     modifier: Modifier = Modifier,
     viewModel: SetupGameViewModel = hiltViewModel(),
     onStartGame: (List<String>) -> Unit,
+    onBackPressed: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -26,5 +27,6 @@ fun SetupGameScreen(
         modifier = modifier,
         uiState = uiState,
         onEvent = viewModel::onEvent,
+        onBackPressed = onBackPressed,
     )
 }
