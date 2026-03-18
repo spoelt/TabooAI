@@ -66,6 +66,7 @@ dependencies {
     ksp(libs.moshi.kotlin.codegen)
     implementation(libs.compose.swipeable.cards)
     implementation(libs.lottie.compose)
+    implementation(libs.androidx.core.splashscreen)
 
     testImplementation(libs.junit)
 
