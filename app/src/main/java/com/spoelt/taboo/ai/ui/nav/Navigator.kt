@@ -10,8 +10,18 @@ class Navigator(val state: NavigationState){
         if (route in state.backStacks.keys){
             // This is a top level route, just switch to it.
             state.topLevelRoute = route
+            // Also clear the stack of the top level route to start fresh if needed
+            state.backStacks[route]?.apply {
+                while (size > 1) {
+                    removeLastOrNull()
+                }
+            }
         } else {
-            state.backStacks[state.topLevelRoute]?.add(route)
+            val currentStack = state.backStacks[state.topLevelRoute]
+            // Simple "Single Top" implementation to avoid duplicate screens
+            if (currentStack?.lastOrNull() != route) {
+                currentStack?.add(route)
+            }
         }
     }
 
@@ -22,7 +32,9 @@ class Navigator(val state: NavigationState){
 
         // If we're at the base of the current route, go back to the start route stack.
         if (currentRoute == state.topLevelRoute){
-            state.topLevelRoute = state.startRoute
+            if (state.topLevelRoute != state.startRoute) {
+                state.topLevelRoute = state.startRoute
+            }
         } else {
             currentStack.removeLastOrNull()
         }
