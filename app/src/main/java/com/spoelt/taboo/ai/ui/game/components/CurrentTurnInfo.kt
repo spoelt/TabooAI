@@ -15,11 +15,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import com.spoelt.taboo.ai.R
 import com.spoelt.taboo.ai.data.util.formatTimeLeft
@@ -38,7 +41,15 @@ fun CurrentTurnInfo(
         formatTimeLeft(guessingTime)
     }
 
+    val haptic = LocalHapticFeedback.current
     val isLowTime = guessingTime in 1..10_000L
+    val isCriticalTime = guessingTime in 1..5_000L
+
+    LaunchedEffect(guessingTime / 1000) {
+        if (isCriticalTime) {
+            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+        }
+    }
 
     val infiniteTransition = rememberInfiniteTransition(label = "PulseTransition")
     val pulseScale by infiniteTransition.animateFloat(
