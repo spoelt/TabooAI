@@ -79,7 +79,10 @@ fun GameContent(
                     }
                 }
 
-                TabooAnimatedVisibility(showLoadingAnimation) {
+                TabooAnimatedVisibility(
+                    visible = showLoadingAnimation,
+                    fadeOnly = true,
+                ) {
                     LoadingAnimation(
                         isTransitioning = uiState.isTransitioningBetweenPlayers,
                         playerName = uiState.nextPlayerName,
@@ -89,7 +92,10 @@ fun GameContent(
         },
         bottomBarContent = {
             if (!uiState.isLoading) {
-                TabooAnimatedVisibility(!uiState.isTransitioningBetweenPlayers) {
+                TabooAnimatedVisibility(
+                    visible = !uiState.isTransitioningBetweenPlayers,
+                    fadeOnly = true,
+                ) {
                     TabooPrimaryButton(
                         modifier = Modifier
                             .fillMaxWidth()
