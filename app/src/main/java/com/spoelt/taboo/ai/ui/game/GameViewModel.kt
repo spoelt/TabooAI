@@ -2,6 +2,7 @@ package com.spoelt.taboo.ai.ui.game
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.spoelt.taboo.ai.domain.model.TabooCardData
 import com.spoelt.taboo.ai.domain.repository.WordRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -90,15 +91,6 @@ class GameViewModel @Inject constructor(
         when (event) {
             is GameEvent.CardExplained -> {
                 _uiState.update { state ->
-                    // in case we have iterated through all the cards and would start at the
-                    // beginning again - end the game
-                    val nextCardIndex = state.totalCards.indexOf(event.card).plus(1)
-                    if (state.totalCards.getOrNull(nextCardIndex)?.id == state.firstCardId) {
-                        // TODO display info that all cards have been played
-                        endGame()
-                        return@update state
-                    }
-
                     state.copy(
                         players = state.players.mapIndexed { index, player ->
                             if (index == state.currentPlayerIndex) {
@@ -109,17 +101,12 @@ class GameViewModel @Inject constructor(
                         },
                     )
                 }
+
+                if (isLastCard(event.card)) endGame()
             }
 
             is GameEvent.CardSkipped -> {
-                val cards = _uiState.value.totalCards
-                val nextCardIndex = cards.indexOf(event.card).plus(1)
-                val firstCardId = _uiState.value.firstCardId
-
-                if (cards.getOrNull(nextCardIndex)?.id == firstCardId) {
-                    // TODO display info that all cards have been played
-                    endGame()
-                }
+                if (isLastCard(event.card)) endGame()
             }
 
             GameEvent.TimeRunOut -> {
@@ -151,6 +138,12 @@ class GameViewModel @Inject constructor(
                 endGame()
             }
         }
+    }
+
+    private fun isLastCard(card: TabooCardData): Boolean {
+        val cards = _uiState.value.totalCards
+        val currentIndex = cards.indexOf(card)
+        return currentIndex != -1 && currentIndex == cards.size - 1
     }
 
     private fun List<PlayerData>.rotateCurrentPlayer(): List<PlayerData> {

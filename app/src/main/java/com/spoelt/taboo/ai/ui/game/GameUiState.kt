@@ -25,9 +25,6 @@ data class GameUiState(
 
     val nextPlayerName: String?
         get() = nextPlayerIndex?.let { players.getOrNull(it)?.name }
-
-    val firstCardId: Int?
-        get() = totalCards.firstOrNull()?.id
 }
 
 @Serializable
