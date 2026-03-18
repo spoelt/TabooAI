@@ -7,6 +7,8 @@ data class GameUiState(
     val isLoading: Boolean = true,
     val players: List<PlayerData> = emptyList(),
     val totalCards: List<TabooCardData> = emptyList(),
+    val currentCardIndex: Int = 0,
+    val stackResetKey: Int = 0,
     val isTransitioningBetweenPlayers: Boolean = false,
     val guessingTimeMillis: Long = 60_000L,
 ) {

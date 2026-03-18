@@ -3,6 +3,7 @@ package com.spoelt.taboo.ai.ui.game.components
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.spartapps.swipeablecards.state.rememberSwipeableCardsState
@@ -17,34 +18,38 @@ import com.spoelt.taboo.ai.ui.theme.Dimens
 fun CardStack(
     modifier: Modifier = Modifier,
     cards: List<TabooCardData>,
+    initialCardIndex: Int,
+    stackResetKey: Int,
     onCardExplained: (TabooCardData) -> Unit,
     onCardSkipped: (TabooCardData) -> Unit,
 ) {
-    val state = rememberSwipeableCardsState(
-        initialCardIndex = 0,
-        itemCount = { cards.size }
-    )
-
-    LazySwipeableCards(
-        modifier = modifier
-            .padding(top = Dimens.spacingM)
-            .fillMaxWidth()
-            .padding(end = Dimens.spacingM),
-        state = state,
-        onSwipe = { card, direction ->
-            when (direction) {
-                SwipeableCardDirection.Right -> onCardExplained(card)
-                SwipeableCardDirection.Left -> onCardSkipped(card)
-            }
-        },
-        properties = SwipeableCardsProperties(
-            stackedCardsOffset = 56.dp,
+    key(stackResetKey) {
+        val state = rememberSwipeableCardsState(
+            initialCardIndex = initialCardIndex,
+            itemCount = { cards.size }
         )
-    ) {
-        items(cards) { card, _, _ ->
-            TabooCard(
-                card = card,
+
+        LazySwipeableCards(
+            modifier = modifier
+                .padding(top = Dimens.spacingM)
+                .fillMaxWidth()
+                .padding(end = Dimens.spacingM),
+            state = state,
+            onSwipe = { card, direction ->
+                when (direction) {
+                    SwipeableCardDirection.Right -> onCardExplained(card)
+                    SwipeableCardDirection.Left -> onCardSkipped(card)
+                }
+            },
+            properties = SwipeableCardsProperties(
+                stackedCardsOffset = 56.dp,
             )
+        ) {
+            items(cards) { card, _, _ ->
+                TabooCard(
+                    card = card,
+                )
+            }
         }
     }
 }

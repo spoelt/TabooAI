@@ -67,6 +67,8 @@ fun GameContent(
 
                         CardStack(
                             cards = uiState.totalCards,
+                            initialCardIndex = uiState.currentCardIndex,
+                            stackResetKey = uiState.stackResetKey,
                             onCardExplained = { card ->
                                 onEvent(GameEvent.CardExplained(card))
                             },

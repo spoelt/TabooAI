@@ -92,6 +92,7 @@ class GameViewModel @Inject constructor(
             is GameEvent.CardExplained -> {
                 _uiState.update { state ->
                     state.copy(
+                        currentCardIndex = state.currentCardIndex + 1,
                         players = state.players.mapIndexed { index, player ->
                             if (index == state.currentPlayerIndex) {
                                 player.copy(points = player.points + 1)
@@ -106,6 +107,9 @@ class GameViewModel @Inject constructor(
             }
 
             is GameEvent.CardSkipped -> {
+                _uiState.update { state ->
+                    state.copy(currentCardIndex = state.currentCardIndex + 1)
+                }
                 if (isLastCard(event.card)) endGame()
             }
 
@@ -113,11 +117,18 @@ class GameViewModel @Inject constructor(
                 guessingTimerJob?.cancel()
 
                 viewModelScope.launch {
+                    val wasLastCard = _uiState.value.currentCardIndex == _uiState.value.totalCards.size - 1
+
                     _uiState.update { state ->
                         state.copy(
                             isTransitioningBetweenPlayers = true,
                             guessingTimeMillis = 0L,
                         )
+                    }
+
+                    if (wasLastCard) {
+                        endGame()
+                        return@launch
                     }
 
                     delay(TRANSITION_TIME)
@@ -126,6 +137,8 @@ class GameViewModel @Inject constructor(
                         val updatedPlayers = state.players.rotateCurrentPlayer()
                         state.copy(
                             players = updatedPlayers,
+                            currentCardIndex = state.currentCardIndex + 1,
+                            stackResetKey = state.stackResetKey + 1,
                             isTransitioningBetweenPlayers = false,
                         )
                     }
