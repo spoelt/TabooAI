@@ -5,128 +5,83 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import com.spoelt.taboo.ai.R
 
-val HeaderFont = FontFamily(
-    Font(R.font.kranky_regular, FontWeight.Bold),
+// Font Family Definitions
+val PlusJakartaSans = FontFamily(
+    Font(R.font.plus_jakarta_sans_regular, FontWeight.Normal),
+    Font(R.font.plus_jakarta_sans_medium, FontWeight.Medium),
+    Font(R.font.plus_jakarta_sans_semibold, FontWeight.SemiBold),
+    Font(R.font.plus_jakarta_sans_bold, FontWeight.Bold),
+    Font(R.font.plus_jakarta_sans_extrabold, FontWeight.ExtraBold)
 )
 
-val BodyFont = FontFamily(
-    Font(R.font.outfit_black, FontWeight.Black),
-    Font(R.font.outfit_extra_bold, FontWeight.ExtraBold),
-    Font(R.font.outfit_bold, FontWeight.Bold),
-    Font(R.font.outfit_semi_bold, FontWeight.SemiBold),
-    Font(R.font.outfit_medium, FontWeight.Medium),
-    Font(R.font.outfit_regular, FontWeight.Normal),
-    Font(R.font.outfit_light, FontWeight.Light),
-    Font(R.font.outfit_extra_light, FontWeight.ExtraLight),
-    Font(R.font.outfit_thin, FontWeight.Thin),
+val BeVietnamPro = FontFamily(
+    Font(R.font.be_vietnam_pro_regular, FontWeight.Normal),
+    Font(R.font.be_vietnam_pro_medium, FontWeight.Medium),
+    Font(R.font.be_vietnam_pro_semibold, FontWeight.SemiBold),
+    Font(R.font.be_vietnam_pro_bold, FontWeight.Bold),
+    Font(R.font.be_vietnam_pro_extrabold, FontWeight.ExtraBold)
 )
 
+// Material 3 Typography Mapping
 val TabooTypography = Typography(
+    // Large Branding / Logo Style
     displayLarge = TextStyle(
-        fontFamily = HeaderFont,
-        fontWeight = FontWeight.Bold,
-        fontSize = Dimens.fontDisplayLarge,
-        lineHeight = Dimens.lineHeightDisplayLarge,
-        letterSpacing = Dimens.letterSpacingDisplayLarge
+        fontFamily = PlusJakartaSans,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 32.sp,
+        lineHeight = 40.sp,
+        letterSpacing = (-0.5).sp
     ),
-    displayMedium = TextStyle(
-        fontFamily = HeaderFont,
-        fontWeight = FontWeight.Bold,
-        fontSize = Dimens.fontDisplayMedium,
-        lineHeight = Dimens.lineHeightDisplayMedium,
-        letterSpacing = Dimens.letterSpacingDisplayMedium
-    ),
-    displaySmall = TextStyle(
-        fontFamily = HeaderFont,
-        fontWeight = FontWeight.Bold,
-        fontSize = Dimens.fontDisplaySmall,
-        lineHeight = Dimens.lineHeightDisplaySmall,
-        letterSpacing = Dimens.letterSpacingDisplaySmall
-    ),
+    // Section Headers
     headlineLarge = TextStyle(
-        fontFamily = HeaderFont,
+        fontFamily = PlusJakartaSans,
         fontWeight = FontWeight.Bold,
-        fontSize = Dimens.fontHeadlineLarge,
-        lineHeight = Dimens.lineHeightHeadlineLarge,
-        letterSpacing = Dimens.letterSpacingHeadlineLarge
+        fontSize = 32.sp,
+        lineHeight = 40.sp
     ),
     headlineMedium = TextStyle(
-        fontFamily = HeaderFont,
+        fontFamily = PlusJakartaSans,
         fontWeight = FontWeight.Bold,
-        fontSize = Dimens.fontHeadlineMedium,
-        lineHeight = Dimens.lineHeightHeadlineMedium,
-        letterSpacing = Dimens.letterSpacingHeadlineMedium
+        fontSize = 28.sp,
+        lineHeight = 36.sp
     ),
     headlineSmall = TextStyle(
-        fontFamily = HeaderFont,
+        fontFamily = BeVietnamPro,
         fontWeight = FontWeight.Bold,
-        fontSize = Dimens.fontHeadlineSmall,
-        lineHeight = Dimens.lineHeightHeadlineSmall,
-        letterSpacing = Dimens.letterSpacingHeadlineSmall
+        fontSize = 24.sp,
+        lineHeight = 32.sp
     ),
+    // Card Titles and Main UI Labels
     titleLarge = TextStyle(
-        fontFamily = BodyFont,
+        fontFamily = BeVietnamPro,
         fontWeight = FontWeight.SemiBold,
-        fontSize = Dimens.fontTitleLarge,
-        lineHeight = Dimens.lineHeightTitleLarge,
-        letterSpacing = Dimens.letterSpacingTitleLarge
+        fontSize = 22.sp,
+        lineHeight = 28.sp
     ),
-    titleMedium = TextStyle(
-        fontFamily = BodyFont,
-        fontWeight = FontWeight.Medium,
-        fontSize = Dimens.fontTitleMedium,
-        lineHeight = Dimens.lineHeightTitleMedium,
-        letterSpacing = Dimens.letterSpacingTitleMedium
-    ),
-    titleSmall = TextStyle(
-        fontFamily = BodyFont,
-        fontWeight = FontWeight.Medium,
-        fontSize = Dimens.fontTitleSmall,
-        lineHeight = Dimens.lineHeightTitleSmall,
-        letterSpacing = Dimens.letterSpacingTitleSmall
-    ),
+    // Target Gameplay Word ("ASTRONAUT")
     bodyLarge = TextStyle(
-        fontFamily = BodyFont,
-        fontWeight = FontWeight.Normal,
-        fontSize = Dimens.fontBodyLarge,
-        lineHeight = Dimens.lineHeightBodyLarge,
-        letterSpacing = Dimens.letterSpacingBodyLarge
+        fontFamily = BeVietnamPro,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 36.sp,
+        lineHeight = 40.sp,
+        letterSpacing = 0.sp
     ),
+    // Lists and Secondary Content
     bodyMedium = TextStyle(
-        fontFamily = BodyFont,
+        fontFamily = BeVietnamPro,
         fontWeight = FontWeight.Normal,
-        fontSize = Dimens.fontBodyMedium,
-        lineHeight = Dimens.lineHeightBodyMedium,
-        letterSpacing = Dimens.letterSpacingBodyMedium
+        fontSize = 16.sp,
+        lineHeight = 24.sp
     ),
-    bodySmall = TextStyle(
-        fontFamily = BodyFont,
-        fontWeight = FontWeight.Light,
-        fontSize = Dimens.fontBodySmall,
-        lineHeight = Dimens.lineHeightBodySmall,
-        letterSpacing = Dimens.letterSpacingBodySmall
-    ),
-    labelLarge = TextStyle(
-        fontFamily = BodyFont,
-        fontWeight = FontWeight.Medium,
-        fontSize = Dimens.fontLabelLarge,
-        lineHeight = Dimens.lineHeightLabelLarge,
-        letterSpacing = Dimens.letterSpacingLabelLarge
-    ),
+    // Navigation Labels / Chips
     labelMedium = TextStyle(
-        fontFamily = BodyFont,
+        fontFamily = BeVietnamPro,
         fontWeight = FontWeight.Medium,
-        fontSize = Dimens.fontLabelMedium,
-        lineHeight = Dimens.lineHeightLabelMedium,
-        letterSpacing = Dimens.letterSpacingLabelMedium
-    ),
-    labelSmall = TextStyle(
-        fontFamily = BodyFont,
-        fontWeight = FontWeight.Medium,
-        fontSize = Dimens.fontLabelSmall,
-        lineHeight = Dimens.lineHeightLabelSmall,
-        letterSpacing = Dimens.letterSpacingLabelSmall
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.5.sp
     )
 )

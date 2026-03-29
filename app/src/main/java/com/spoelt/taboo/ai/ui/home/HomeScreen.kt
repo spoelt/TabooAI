@@ -2,14 +2,27 @@ package com.spoelt.taboo.ai.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bolt
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,10 +33,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.spoelt.taboo.ai.R
 import com.spoelt.taboo.ai.domain.model.HomeScreenButtonType
 import com.spoelt.taboo.ai.ui.components.LiquidGlassCard
 import com.spoelt.taboo.ai.ui.components.TabooScreen
+import com.spoelt.taboo.ai.ui.home.components.HomeHeader
 import com.spoelt.taboo.ai.ui.theme.Dimens
 import com.spoelt.taboo.ai.ui.theme.TabooTheme
 
@@ -41,40 +56,46 @@ fun HomeScreen(
     TabooScreen(
         modifier = modifier,
         content = { innerPadding ->
-            Column(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(Dimens.spacingM),
+                    .padding(innerPadding),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
+                contentPadding = PaddingValues(
+                    top = WindowInsets.statusBars.asPaddingValues()
+                        .calculateTopPadding() + Dimens.spacingS,
+                    bottom = WindowInsets.navigationBars.asPaddingValues()
+                        .calculateBottomPadding() + Dimens.spacingM,
+                    start = Dimens.spacingM,
+                    end = Dimens.spacingM,
+                ),
+                verticalArrangement = Arrangement.spacedBy(Dimens.spacingL),
             ) {
-                LiquidGlassCard(modifier = Modifier.fillMaxWidth(0.85f)) {
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(Dimens.spacingM),
-                        text = stringResource(R.string.home_screen_title),
-                        style = MaterialTheme.typography.displayLarge,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        textAlign = TextAlign.Center,
+                item {
+                    HomeHeader(
+                        onLightningRoundClick = {
+                            // TODO
+                        },
+                        onSettingsClick = {
+                            // TODO
+                        }
                     )
                 }
 
-                Spacer(modifier = Modifier.height(Dimens.spacingM))
-
-                LiquidGlassCard(modifier = Modifier.fillMaxWidth(0.85f)) {
-                    Column(
-                        modifier = Modifier.padding(Dimens.spacingL),
-                        verticalArrangement = Arrangement.spacedBy(Dimens.spacingM),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        homeButtonTypes.forEach { type ->
-                            HomeScreenButton(
-                                modifier = Modifier.fillMaxWidth(),
-                                type = type,
-                                onClick = { onHomeButtonClick(type) },
-                            )
+                item {
+                    LiquidGlassCard(modifier = Modifier.fillMaxWidth()) {
+                        Column(
+                            modifier = Modifier.padding(Dimens.spacingL),
+                            verticalArrangement = Arrangement.spacedBy(Dimens.spacingM),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            homeButtonTypes.forEach { type ->
+                                HomeScreenButton(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    type = type,
+                                    onClick = { onHomeButtonClick(type) },
+                                )
+                            }
                         }
                     }
                 }

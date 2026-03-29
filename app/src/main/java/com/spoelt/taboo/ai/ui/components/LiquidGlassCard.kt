@@ -28,7 +28,7 @@ fun LiquidGlassCard(
         ),
         colors = CardDefaults.cardColors(
             // "liquid glass" look
-            containerColor = Color.Black.copy(alpha = 0.55f)
+            containerColor = Color.Black.copy(alpha = 0.7f)
         ),
         border = BorderStroke(
             width = 1.dp,
